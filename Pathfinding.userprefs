@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{1EEB8667-E8C3-1A9E-EA77-3C6CA1D84064}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Node.cs">
+    <Files>
+      <File FileName="Assets/Node.cs" Line="10" Column="5" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Pathfinding PreferredExecutionTarget="Unity.Editor" />
+</Properties>
