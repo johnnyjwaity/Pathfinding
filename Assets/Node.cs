@@ -12,6 +12,8 @@ public class Node : MonoBehaviour {
     public bool isFinishNode;
     public bool search;
 
+    private List<Node> currentPath = new List<Node>();
+
 	// Use this for initialization
 	void Start () {
         if(isStartNode){
@@ -25,14 +27,29 @@ public class Node : MonoBehaviour {
         {
             foreach(List<Node> path in foundFinish())
             {
+                currentPath.Clear();
                 Debug.Log("START NEW PATH");
                 foreach(Node n in path)
                 {
                     Debug.Log("Path", n);
+                    currentPath.Add(n);
                 }
             }
             search = false;
         }
+
+
+        if(currentPath.Count > 0){
+            int counter = 0;
+            foreach(Node n in currentPath){
+                if(counter < currentPath.Count-1){
+                    Debug.DrawLine(n.transform.position, currentPath[counter + 1].transform.position, Color.green, 1, true);
+                }
+                counter++;
+            }
+        }
+
+
 	}
 
 
