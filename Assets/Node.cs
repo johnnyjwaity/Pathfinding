@@ -12,12 +12,12 @@ public class Node : MonoBehaviour {
     public bool isFinishNode;
     public bool search;
 
-    private List<Node> currentPath = new List<Node>();
+    private List<List<Node>> currentPath = new List<List<Node>>();
 
 	// Use this for initialization
 	void Start () {
         if(isStartNode){
-            scan();
+            
         }
 	}
 	
@@ -25,28 +25,26 @@ public class Node : MonoBehaviour {
 	void Update () {
         if (search)
         {
-            foreach(List<Node> path in foundFinish())
-            {
-                currentPath.Clear();
-                Debug.Log("START NEW PATH");
-                foreach(Node n in path)
-                {
-                    Debug.Log("Path", n);
-                    currentPath.Add(n);
-                }
-            }
+            scan();
+            currentPath = foundFinish();
+            Debug.Log(currentPath.Count);
             search = false;
         }
 
+        List <Color> lineColors = new List<Color>();
+        lineColors.Add(Color.red);
+        lineColors.Add(Color.yellow);
+        lineColors.Add(Color.green);
+        lineColors.Add(Color.blue);
+        lineColors.Add(Color.black);
+        lineColors.Add(Color.gray);
+        int counter = 0;
 
-        if(currentPath.Count > 0){
-            int counter = 0;
-            foreach(Node n in currentPath){
-                if(counter < currentPath.Count-1){
-                    Debug.DrawLine(n.transform.position, currentPath[counter + 1].transform.position, Color.green, 1, true);
-                }
-                counter++;
+        foreach(List<Node> path in currentPath){
+            for (int i = 0; i < path.Count - 1; i++){
+                Debug.DrawLine(path[i].transform.position, path[i+1].transform.position, lineColors[counter], 1, true);
             }
+            counter++;
         }
 
 
@@ -68,6 +66,9 @@ public class Node : MonoBehaviour {
             if (isParent || cNode.nodeId == nodeId){
                 continue;
             }
+            //if(cNode.nodeId == nodeId){
+            //    continue;
+            //}
             Vector3 rayDirection = cNode.transform.position - transform.position;
             RaycastHit hit = new RaycastHit();
             if(Physics.Raycast(transform.position, rayDirection.normalized, out hit)){
@@ -88,6 +89,7 @@ public class Node : MonoBehaviour {
             
         }
         foreach(Node sNode in sightedNodes){
+            
             sNode.scan();
         }
     }

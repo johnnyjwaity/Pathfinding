@@ -1,7 +1,8 @@
 ﻿<Properties StartupConfiguration="{1EEB8667-E8C3-1A9E-EA77-3C6CA1D84064}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Node.cs">
     <Files>
-      <File FileName="Assets/Node.cs" Line="12" Column="25" />
+      <File FileName="Assets/Node.cs" Line="6" Column="5" />
+      <File FileName="Assets/NodeManager.cs" Line="20" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
