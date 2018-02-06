@@ -11,6 +11,7 @@ public class Node : MonoBehaviour {
     public bool isStartNode;
     public bool isFinishNode;
     public bool search;
+    private Node finish;
 
     private List<List<Node>> currentPath = new List<List<Node>>();
 
@@ -56,6 +57,10 @@ public class Node : MonoBehaviour {
         //Debug.Log("All Nodes Length" + allNodes.Length);
         List<Node> sightedNodes = new List<Node>();
         foreach(Node cNode in allNodes){
+            if (cNode.isFinishNode)
+            {
+                finish = cNode;
+            }
             bool isParent = false;
             foreach(Node pNode in parentNodes){
                 if(cNode.nodeId == pNode.nodeId){
@@ -88,9 +93,34 @@ public class Node : MonoBehaviour {
             }
             
         }
-        foreach(Node sNode in sightedNodes){
-            
-            sNode.scan();
+
+        List<Node> orderedNodes = new List<Node>();
+        if(finish != null)
+        {
+            foreach(Node sNode in sightedNodes)
+            {
+                bool inserted = false;
+                for(int i = 0; i < orderedNodes.Count; i++)
+                {
+                    if(Vector3.Distance(sNode.gameObject.transform.position, finish.gameObject.transform.position) < Vector3.Distance(orderedNodes[i].gameObject.transform.position, finish.gameObject.transform.position))
+                    {
+                        orderedNodes.Insert(i, sNode);
+                        inserted = true;
+                        break;
+                    }
+                }
+                if(!inserted)
+                {
+                    orderedNodes.Add(sNode);
+                }
+            }
+        }
+        else
+        {
+            orderedNodes = sightedNodes;
+        }
+        foreach(Node oNode in orderedNodes){
+            oNode.scan();
         }
     }
 
